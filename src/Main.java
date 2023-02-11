@@ -59,7 +59,7 @@ public class Main {
 	
 	public void insertData() {
 		formData(1);
-	    System.out.println("Data karyawan baru berhasil ditambahkan");
+	    
 	}
 	
 	private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -165,6 +165,8 @@ public class Main {
 
 	    		  Manager m = new Manager(kode, nama, jenisKelamin, jabatan, gaji);
 	    		  pegawae.add(m);
+	    		  System.out.println("Berhasil menambahkan karyawan dengan id " + kode);
+	    		  System.out.println("ENTER to return"); scan.nextLine();
 	    		} else if(jabatan.equals("Supervisor")) {
 	    		  jumlahSupervisor++;
 	    		  Random random = new Random();
@@ -194,6 +196,8 @@ public class Main {
 
 	    		  superVisor s = new superVisor(kode, nama, jenisKelamin, jabatan, gaji);
 	    		  pegawae.add(s);
+	    		  System.out.println("Berhasil menambahkan karyawan dengan id " + kode);
+	    		  System.out.println("ENTER to return"); scan.nextLine();
 	    		}
 		    else if(jabatan.equals("Admin")) {
 		    	  jumlahAdmin++;
@@ -226,6 +230,8 @@ public class Main {
 		    	  
 		    	  Admin a = new Admin(kode,nama,jenisKelamin,jabatan,gaji);
 		    	  pegawae.add(a);
+		    	  System.out.println("Berhasil menambahkan karyawan dengan id " + kode);
+	    		  System.out.println("ENTER to return"); scan.nextLine();
 		    	}
 	    
 		}
@@ -279,6 +285,7 @@ public class Main {
 	            System.out.println("| " + String.format("%1$-" + gajiMaxLength + "s", x.getGaji()) + " |");
 			}
 			    System.out.println(  "------------------------------------------------------------------------------------");
+			    System.out.println("ENTER to return"); scan.nextLine();
 		}
 		
 	}
@@ -294,8 +301,7 @@ public class Main {
 		String temp = pegawae.get(pilihan-1).getKodeKaryawan();
 		pegawae.remove(pilihan-1);
 		System.out.println("Karyawan dengan kode " + temp + " berhasil dihapus");
-		
-		
+		System.out.println("ENTER to return"); scan.nextLine();
 	}
 	
 	public void updateData() {
