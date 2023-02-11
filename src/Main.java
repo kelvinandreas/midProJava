@@ -32,16 +32,27 @@ public class Main {
 						insertData();
 						 break;
 					case 2:
-						viewData();
+						if(pegawae.size()>0) {
+							viewData();
+						}else {
+							System.out.println("Data karyawan kosong");
+							System.out.print("ENTER to return"); scan.nextLine();
+						}	
 						break;
 					case 3:
-						updateData();
+						if(pegawae.size()>0) {
+							updateData();
+						}else {
+							System.out.println("Tidak ada data karyawan yang bisa diupdate");
+							System.out.print("ENTER to return"); scan.nextLine();
+						}
 						break;
 					case 4:
 						if(pegawae.size()>0) {
 							deleteData();
 						}else {
 							System.out.println("Tidak ada data karyawan yang bisa dihapus");
+							System.out.print("ENTER to return"); scan.nextLine();
 						}
 						break;
 					case 5:
@@ -51,6 +62,7 @@ public class Main {
 						break;
 					default:
 						System.out.println("Tolong masukkan angka yang benar");
+						System.out.print("ENTER to return"); scan.nextLine();
 						break;
 				}
 		} while (pilihan != 5);
@@ -59,7 +71,6 @@ public class Main {
 	
 	public void insertData() {
 		formData(1);
-	    
 	}
 	
 	private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -100,7 +111,7 @@ public class Main {
 		        System.out.println("=================================================\n");
 		    }
 		}
-		else {
+		else if(i==-1){
 		    while (true) {
 		        System.out.print("Input nama karyawan [>= 3]: ");
 		        nama = scan.nextLine();
@@ -157,7 +168,7 @@ public class Main {
 
 	    		    System.out.println("Bonus sebesar 7.5% telah diberikan pada " + (3*(jumlahManager/3)) + " karyawan Manager dengan id ");
 	    		    for(int z = 0 ; z < (3*(jumlahManager/3))  ; z++) {
-	    		      String temp = pegawae.get(z-1).getKodeKaryawan();
+	    		      String temp = pegawae.get(z).getKodeKaryawan();
 	    		      System.out.print(temp + " ");
 	    		    }
 	    		    System.out.println();
@@ -166,8 +177,9 @@ public class Main {
 	    		  Manager m = new Manager(kode, nama, jenisKelamin, jabatan, gaji);
 	    		  pegawae.add(m);
 	    		  System.out.println("Berhasil menambahkan karyawan dengan id " + kode);
-	    		  System.out.println("ENTER to return"); scan.nextLine();
-	    		} else if(jabatan.equals("Supervisor")) {
+	    		  System.out.print("ENTER to return"); scan.nextLine();
+	    		} 
+	    	else if(jabatan.equals("Supervisor")) {
 	    		  jumlahSupervisor++;
 	    		  Random random = new Random();
 	    		  StringBuilder sb = new StringBuilder();
@@ -188,7 +200,7 @@ public class Main {
 
 	    		    System.out.println("Bonus sebesar 7.5% telah diberikan pada " + (3*(jumlahSupervisor/3)) + " karyawan Supervisor dengan id ");
 	    		    for(int z = 0 ; z < (3*(jumlahSupervisor/3))  ; z++) {
-	    		      String temp = pegawae.get(z-1).getKodeKaryawan();
+	    		      String temp = pegawae.get(z).getKodeKaryawan();
 	    		      System.out.print(temp + " ");
 	    		    }
 	    		    System.out.println();
@@ -197,8 +209,9 @@ public class Main {
 	    		  superVisor s = new superVisor(kode, nama, jenisKelamin, jabatan, gaji);
 	    		  pegawae.add(s);
 	    		  System.out.println("Berhasil menambahkan karyawan dengan id " + kode);
-	    		  System.out.println("ENTER to return"); scan.nextLine();
+	    		  System.out.print("ENTER to return"); scan.nextLine();
 	    		}
+	    	
 		    else if(jabatan.equals("Admin")) {
 		    	  jumlahAdmin++;
 		    	  Random random = new Random();
@@ -231,9 +244,138 @@ public class Main {
 		    	  Admin a = new Admin(kode,nama,jenisKelamin,jabatan,gaji);
 		    	  pegawae.add(a);
 		    	  System.out.println("Berhasil menambahkan karyawan dengan id " + kode);
-	    		  System.out.println("ENTER to return"); scan.nextLine();
+	    		  System.out.print("ENTER to return"); scan.nextLine();
 		    	}
-	    
+		}
+		else {
+			while (true) {
+		        System.out.print("Input nama karyawan [>= 3]: ");
+		        nama = scan.nextLine();
+		        if (nama.length() >= 3) {
+		            break;
+		        }
+		        System.out.println("\n=================================");
+		        System.out.println("= Nama karyawan minimal 3 huruf =");
+		        System.out.println("=================================\n");
+		    }
+		    while (true) {
+		        System.out.print("Input jenis kelamin [Laki-Laki | Perempuan] (Case Sensitive): ");
+		        jenisKelamin = scan.nextLine();
+		        if (jenisKelamin.equals("Laki-Laki") || jenisKelamin.equals("Perempuan")) {
+		            break;
+		        }
+		        System.out.println("\n================================================");
+		        System.out.println("= Jenis kelamin harus Laki-Laki atau Perempuan =");
+		        System.out.println("================================================\n");
+		    }
+		    while (true) {
+		        System.out.print("Input jabatan [Manager | Supervisor | Admin] (Case Sensitive): ");
+		        jabatan = scan.nextLine();
+		        if (jabatan.equals("Manager") || jabatan.equals("Supervisor") || jabatan.equals("Admin")) {
+		            break;
+		        }
+		        System.out.println("\n=================================================");
+		        System.out.println("= Jabatan harus Manager, Supervisor, atau Admin =");
+		        System.out.println("=================================================\n");
+		    }
+		    
+	    	int jumlahManager = 0;
+	    	int jumlahSupervisor = 0;
+	    	int jumlahAdmin = 0;
+	    	
+	    	if (jabatan.equals("Manager")) {
+	    		  jumlahManager++;
+	    		  Random random = new Random();
+	    		  StringBuilder sb = new StringBuilder();
+	    		  for (int j = 0; j < 2; j++) {
+	    		    sb.append(ALPHABET.charAt(random.nextInt(ALPHABET.length())));
+	    		  }
+	    		  sb.append("-");
+	    		  for (int j = 0; j < LENGTH; j++) {
+	    		    sb.append(random.nextInt(10));
+	    		  }
+	    		  kode = sb.toString();
+
+	    		  gaji = 8000000;
+
+	    		  if(jumlahManager/3 !=0) {
+	    		    double bonus = 0.075*gaji;
+	    		    gaji += bonus;
+
+	    		    System.out.println("Bonus sebesar 7.5% telah diberikan pada " + (3*(jumlahManager/3)) + " karyawan Manager dengan id ");
+	    		    for(int z = 0 ; z < (3*(jumlahManager/3))  ; z++) {
+	    		      String temp = pegawae.get(z).getKodeKaryawan();
+	    		      System.out.print(temp + " ");
+	    		    }
+	    		    System.out.println();
+	    		  }
+
+	    		  Manager m = new Manager(kode, nama, jenisKelamin, jabatan, gaji);
+	    		  pegawae.add(m);
+	    		} 
+	    	else if(jabatan.equals("Supervisor")) {
+	    		  jumlahSupervisor++;
+	    		  Random random = new Random();
+	    		  StringBuilder sb = new StringBuilder();
+	    		  for (int j = 0; j < 2; j++) {
+	    		    sb.append(ALPHABET.charAt(random.nextInt(ALPHABET.length())));
+	    		  }
+	    		  sb.append("-");
+	    		  for (int j = 0; j < LENGTH; j++) {
+	    		    sb.append(random.nextInt(10));
+	    		  }
+	    		  kode = sb.toString();
+
+	    		  gaji = 6000000;
+
+	    		  if(jumlahSupervisor/3 != 0) {
+	    		    double bonus = 0.075*gaji;
+	    		    gaji += bonus;
+
+	    		    System.out.println("Bonus sebesar 7.5% telah diberikan pada " + (3*(jumlahSupervisor/3)) + " karyawan Supervisor dengan id ");
+	    		    for(int z = 0 ; z < (3*(jumlahSupervisor/3))  ; z++) {
+	    		      String temp = pegawae.get(z).getKodeKaryawan();
+	    		      System.out.print(temp + " ");
+	    		    }
+	    		    System.out.println();
+	    		  }
+
+	    		  superVisor s = new superVisor(kode, nama, jenisKelamin, jabatan, gaji);
+	    		  pegawae.add(s);
+	    		}
+	    	
+		    else if(jabatan.equals("Admin")) {
+		    	  jumlahAdmin++;
+		    	  Random random = new Random();
+		    	  StringBuilder sb = new StringBuilder();
+		    	  for (int j = 0; j < 2; j++) {
+		    	    sb.append(ALPHABET.charAt(random.nextInt(ALPHABET.length())));
+		    	  }
+		    	  sb.append("-");
+		    	  for (int j = 0; j < LENGTH; j++) {
+		    	    sb.append(random.nextInt(10));
+		    	  }
+		    	  kode = sb.toString();
+
+		    	  gaji = 4000000;
+		    	  
+		    	  int jumlahAdminSebelumnya = jumlahAdmin - 1;
+		    	  if((int)jumlahAdminSebelumnya/3 != 0) {
+		    	    double bonus = 0.05*gaji;
+		    	    gaji += bonus;
+		    	    
+		    	    int indexAwal = jumlahAdminSebelumnya - (3*(jumlahAdminSebelumnya/3));
+		    	    System.out.print("Bonus sebesar 5% telah diberikan pada dengan id ");
+		    	    for(int z = indexAwal ; z < jumlahAdminSebelumnya  ; z++) {
+		    	      String temp = pegawae.get(z).getKodeKaryawan();
+		    	      System.out.print(temp + " ");
+		    	    }
+		    	    System.out.println();
+		    	  }
+		    	  
+		    	  Admin a = new Admin(kode,nama,jenisKelamin,jabatan,gaji);
+		    	  pegawae.add(a);
+		    	}
 		}
 	}
 	
@@ -285,9 +427,7 @@ public class Main {
 	            System.out.println("| " + String.format("%1$-" + gajiMaxLength + "s", x.getGaji()) + " |");
 			}
 			    System.out.println(  "------------------------------------------------------------------------------------");
-			    System.out.println("ENTER to return"); scan.nextLine();
-		}
-		
+			    		}
 	}
 	
 	public void deleteData() {
@@ -301,7 +441,7 @@ public class Main {
 		String temp = pegawae.get(pilihan-1).getKodeKaryawan();
 		pegawae.remove(pilihan-1);
 		System.out.println("Karyawan dengan kode " + temp + " berhasil dihapus");
-		System.out.println("ENTER to return"); scan.nextLine();
+		System.out.print("ENTER to return"); scan.nextLine();
 	}
 	
 	public void updateData() {
@@ -316,19 +456,17 @@ public class Main {
 			scan.nextLine();
 			formData(0);
 			System.out.println("Data tidak berhasil di update dan tetap menggunakan data yang lama");
-			System.out.println("ENTER to return"); scan.nextLine();
+			System.out.print("ENTER to return"); scan.nextLine();
 		}
 		else {
 			String temp = pegawae.get(pilihan-1).getKodeKaryawan();
 			pegawae.remove(pilihan-1);
 			scan.nextLine();
-			formData(1); 
+			formData(2); 
 			System.out.println("Berhasil mengupdate karyawan dengan id " + temp);
-			System.out.println("ENTER to return"); scan.nextLine();
+			System.out.print("ENTER to return"); scan.nextLine();
 		}
-		
 	}
-	
 	
 	public static void main(String[] args) {
 		new Main();

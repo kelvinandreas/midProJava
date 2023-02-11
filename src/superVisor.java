@@ -14,8 +14,4 @@ public class superVisor extends Pegawai{
 	public void setGaji(double gajiSupervisor) {
 		this.gajiSupervisor = gajiSupervisor;
 	}
-
-
-
-
 }

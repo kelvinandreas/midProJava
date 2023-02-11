@@ -2,9 +2,6 @@
 public abstract class Pegawai {
  
 	private String kodeKaryawan, namaKaryawan, jenisKelamin, jabatan;
-//	public Pegawai() {
-//		// TODO Auto-generated constructor stub
-//	}
 
 	public Pegawai(String kodeKaryawan, String namaKaryawan, String jenisKelamin, String jabatan) {
 		super();
@@ -13,7 +10,7 @@ public abstract class Pegawai {
 		this.jenisKelamin = jenisKelamin;
 		this.jabatan = jabatan;
 	}
-
+	
 	public String getKodeKaryawan() {
 		return kodeKaryawan;
 	}
@@ -45,6 +42,4 @@ public abstract class Pegawai {
 	public void setJabatan(String jabatan) {
 		this.jabatan = jabatan;
 	}
-
-	
 }

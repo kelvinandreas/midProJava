@@ -15,7 +15,4 @@ public class Admin extends Pegawai{
 	public void setGaji(double gajiAdmin) {
 		this.gajiAdmin = gajiAdmin;
 	}
-
-	
-
 }
